@@ -1,0 +1,15 @@
+<div id="<%= dom_id planning_session %>" class="flex items-center justify-between p-4 hover:bg-gray-100">
+  <a href="<%= planning_session_path(planning_session) %>" class="flex-1 flex justify-between items-center">
+    <span class="font-semibold">
+      <%= planning_session.name %>
+    </span>
+    <span>
+      <%= planning_session.created_at.strftime("%B %d, %Y %l:%M%P") %>
+    </span>
+  </a>
+
+  <div class="ml-4">
+    <%= link_to 'Edit', edit_planning_session_path(planning_session), class: 'text-blue-500 mr-2' %>
+    <%= link_to 'Delete', planning_session_path(planning_session), method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-red-500' %>
+  </div>
+</div>
