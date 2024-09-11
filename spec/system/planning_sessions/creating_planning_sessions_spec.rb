@@ -14,6 +14,6 @@ RSpec.describe 'Creating Planning Session', type: :system do
     fill_in 'Name', with: 'July 1st Sprint'
     click_on 'Save'
 
-    # assert_text 'July 1st Sprint'
+    assert_text 'July 1st Sprint'
   end
 end

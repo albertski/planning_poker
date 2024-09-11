@@ -1,0 +1,7 @@
+<div data-controller="modal" data-action="turbo:frame-load->modal#open turbo:submit-end->modal#close" class="fixed inset-0 z-50 hidden" tabindex="-1" aria-hidden="true">
+  <div class="modal-backdrop flex items-center justify-center min-h-screen p-4 bg-gray-800 bg-opacity-75">
+    <div class="modal-content bg-white rounded-lg shadow-lg p-6 max-w-lg w-full">
+      <%= turbo_frame_tag "modal" %>
+    </div>
+  </div>
+</div>

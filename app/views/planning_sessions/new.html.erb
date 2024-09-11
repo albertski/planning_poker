@@ -1,8 +1,8 @@
 <h1 class="text-3xl font-bold mb-6">New Planning Session</h1>
 
-<div class="bg-white p-6 rounded-lg shadow-md max-w-lg mx-auto">
+<%= turbo_frame_tag "modal" do %>
   <%= render "form", planning_session: @planning_session %>
-</div>
+<% end %>
 
 <div class="mt-4 text-center">
   <%= link_to "Back to planning sessions", planning_sessions_path, class: 'text-blue-500 hover:text-blue-700 font-semibold' %>
