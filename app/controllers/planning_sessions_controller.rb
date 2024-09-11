@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-#
+
 class PlanningSessionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_planning_session, only: %i[ show edit update destroy ]
@@ -48,7 +48,7 @@ class PlanningSessionsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to planning_sessions_url, notice: "Planning session was successfully destroyed." }
-      format.json { head :no_content }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@planning_session) }
     end
   end
 
