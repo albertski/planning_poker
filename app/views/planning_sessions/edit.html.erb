@@ -1,6 +1,8 @@
 <h1>Editing planning session</h1>
 
-<%= render "form", planning_session: @planning_session %>
+<%= turbo_frame_tag "modal" do %>
+  <%= render "form", planning_session: @planning_session %>
+<% end %>
 
 <br>
 

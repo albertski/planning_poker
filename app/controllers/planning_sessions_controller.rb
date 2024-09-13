@@ -28,7 +28,6 @@ class PlanningSessionsController < ApplicationController
         format.turbo_stream { render turbo_stream: turbo_stream.prepend('planning_sessions', @planning_session) }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('modal', partial: 'form', locals: { planning_session: @planning_session }), status: :unprocessable_entity }
       end
     end
   end
@@ -37,9 +36,9 @@ class PlanningSessionsController < ApplicationController
     respond_to do |format|
       if @planning_session.update(planning_session_params)
         format.html { redirect_to planning_session_url(@planning_session), notice: "Planning session was successfully updated." }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@planning_session) }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@planning_session) }
       end
     end
   end

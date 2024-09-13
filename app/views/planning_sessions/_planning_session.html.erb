@@ -10,7 +10,7 @@
     </div>
 
     <div class="absolute right-4 top-1/2 transform -translate-y-1/2 flex space-x-2">
-      <%= link_to 'Edit', edit_planning_session_path(planning_session), class: 'text-blue-500 hover:underline' %>
+      <%= link_to 'Edit', edit_planning_session_path(planning_session), data: { turbo_frame: 'modal' }, class: 'text-blue-500 hover:underline' %>
       <%= link_to 'Delete', planning_session_path(planning_session), method: :delete, data: { turbo_method: :delete, turbo_confirm: 'Are you sure you want to delete' }, class: 'text-red-500 hover:underline' %>
     </div>
   </a>
