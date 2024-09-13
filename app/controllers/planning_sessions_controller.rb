@@ -25,9 +25,10 @@ class PlanningSessionsController < ApplicationController
     respond_to do |format|
       if @planning_session.save
         format.html { redirect_to planning_session_url(@planning_session), notice: "Planning session was successfully created." }
-        format.turbo_stream.prepend 'planning_sessions', @planning_session
+        format.turbo_stream { render turbo_stream: turbo_stream.prepend('planning_sessions', @planning_session) }
       else
-        render :new, status: :unprocessable_entity
+        format.html { render :new, status: :unprocessable_entity }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('modal', partial: 'form', locals: { planning_session: @planning_session }), status: :unprocessable_entity }
       end
     end
   end
