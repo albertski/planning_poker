@@ -11,11 +11,11 @@ RSpec.describe PlanningSessionsController, type: :routing do
     end
 
     it "routes to #show" do
-      expect(get: "/planning_sessions/1").to route_to("planning_sessions#show", id: "1")
+      expect(get: "/planning_sessions/1").to route_to("planning_sessions#show", uuid: "1")
     end
 
     it "routes to #edit" do
-      expect(get: "/planning_sessions/1/edit").to route_to("planning_sessions#edit", id: "1")
+      expect(get: "/planning_sessions/1/edit").to route_to("planning_sessions#edit", uuid: "1")
     end
 
 
@@ -24,15 +24,15 @@ RSpec.describe PlanningSessionsController, type: :routing do
     end
 
     it "routes to #update via PUT" do
-      expect(put: "/planning_sessions/1").to route_to("planning_sessions#update", id: "1")
+      expect(put: "/planning_sessions/1").to route_to("planning_sessions#update", uuid: "1")
     end
 
     it "routes to #update via PATCH" do
-      expect(patch: "/planning_sessions/1").to route_to("planning_sessions#update", id: "1")
+      expect(patch: "/planning_sessions/1").to route_to("planning_sessions#update", uuid: "1")
     end
 
     it "routes to #destroy" do
-      expect(delete: "/planning_sessions/1").to route_to("planning_sessions#destroy", id: "1")
+      expect(delete: "/planning_sessions/1").to route_to("planning_sessions#destroy", uuid: "1")
     end
   end
 end

@@ -1,5 +1,5 @@
 <div id="<%= dom_id planning_session %>" class="relative p-4 bg-gray-50 border-b border-gray-200 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100">
-  <a href="<%= planning_session_path(planning_session) %>" class="flex flex-col lg:flex-row items-center justify-between">
+  <a href="<%= planning_session_path(planning_session.uuid) %>" class="flex flex-col lg:flex-row items-center justify-between">
     <div class="flex-1 flex flex-col lg:flex-row items-start lg:items-center">
       <span class="font-bold text-xl">
         <%= planning_session.name %>
@@ -10,8 +10,8 @@
     </div>
 
     <div class="absolute right-4 top-1/2 transform -translate-y-1/2 flex space-x-2">
-      <%= link_to 'Edit', edit_planning_session_path(planning_session), data: { turbo_frame: 'modal' }, class: 'text-blue-500 hover:underline' %>
-      <%= link_to 'Delete', planning_session_path(planning_session), method: :delete, data: { turbo_method: :delete, turbo_confirm: 'Are you sure you want to delete' }, class: 'text-red-500 hover:underline' %>
+      <%= link_to 'Edit', edit_planning_session_path(planning_session.uuid), data: { turbo_frame: 'modal' }, class: 'text-blue-500 hover:underline' %>
+      <%= link_to 'Delete', planning_session_path(planning_session.uuid), method: :delete, data: { turbo_method: :delete, turbo_confirm: 'Are you sure you want to delete' }, class: 'text-red-500 hover:underline' %>
     </div>
   </a>
 </div>

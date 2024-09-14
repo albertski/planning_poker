@@ -24,7 +24,7 @@ class PlanningSessionsController < ApplicationController
 
     respond_to do |format|
       if @planning_session.save
-        format.html { redirect_to planning_session_url(@planning_session), notice: "Planning session was successfully created." }
+        format.html { redirect_to planning_session_url(@planning_session.uuid), notice: "Planning session was successfully created." }
         format.turbo_stream { render turbo_stream: turbo_stream.prepend('planning_sessions', @planning_session) }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -35,7 +35,7 @@ class PlanningSessionsController < ApplicationController
   def update
     respond_to do |format|
       if @planning_session.update(planning_session_params)
-        format.html { redirect_to planning_session_url(@planning_session), notice: "Planning session was successfully updated." }
+        format.html { redirect_to planning_session_url(@planning_session.uuid), notice: "Planning session was successfully updated." }
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@planning_session) }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -55,7 +55,7 @@ class PlanningSessionsController < ApplicationController
   private
 
     def set_planning_session
-      @planning_session = PlanningSession.find(params[:id])
+      @planning_session = PlanningSession.find_by(uuid: params[:uuid])
     end
 
     def planning_session_params

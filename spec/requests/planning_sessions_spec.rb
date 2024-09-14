@@ -18,7 +18,7 @@ RSpec.describe '/planning_sessions', type: :request do
   describe 'GET /show' do
     it 'renders a successful response' do
       planning_session = PlanningSession.create! valid_attributes
-      get planning_session_url(planning_session)
+      get planning_session_url(planning_session.uuid)
       expect(response).to be_successful
     end
   end
@@ -33,7 +33,7 @@ RSpec.describe '/planning_sessions', type: :request do
   describe 'GET /edit' do
     it 'renders a successful response' do
       planning_session = PlanningSession.create! valid_attributes
-      get edit_planning_session_url(planning_session)
+      get edit_planning_session_url(planning_session.uuid)
       expect(response).to be_successful
     end
   end
@@ -48,7 +48,7 @@ RSpec.describe '/planning_sessions', type: :request do
 
       it 'redirects to the created planning_session' do
         post planning_sessions_url, params: { planning_session: valid_attributes }
-        expect(response).to redirect_to(planning_session_url(PlanningSession.last))
+        expect(response).to redirect_to(planning_session_url(PlanningSession.last.uuid))
       end
     end
 
@@ -62,7 +62,7 @@ RSpec.describe '/planning_sessions', type: :request do
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
         post planning_sessions_url, params: { planning_session: invalid_attributes },
                                     headers: { 'Accept' => 'text/html' }
-        expect(response).to have_http_status(:not_acceptable)
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
@@ -73,23 +73,23 @@ RSpec.describe '/planning_sessions', type: :request do
 
       it 'updates the requested planning_session' do
         planning_session = PlanningSession.create! valid_attributes
-        patch planning_session_url(planning_session), params: { planning_session: new_attributes }
+        patch planning_session_url(planning_session.uuid), params: { planning_session: new_attributes }
         planning_session.reload
         expect(planning_session.name).to eq(new_attributes[:name])
       end
 
       it 'redirects to the planning_session' do
         planning_session = PlanningSession.create! valid_attributes
-        patch planning_session_url(planning_session), params: { planning_session: new_attributes }
+        patch planning_session_url(planning_session.uuid), params: { planning_session: new_attributes }
         planning_session.reload
-        expect(response).to redirect_to(planning_session_url(planning_session))
+        expect(response).to redirect_to(planning_session_url(planning_session.uuid))
       end
     end
 
     context 'with invalid parameters' do
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
         planning_session = PlanningSession.create! valid_attributes
-        patch planning_session_url(planning_session), params: { planning_session: invalid_attributes }, headers: { 'Accept' => 'text/html' }
+        patch planning_session_url(planning_session.uuid), params: { planning_session: invalid_attributes }, headers: { 'Accept' => 'text/html' }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
@@ -99,13 +99,13 @@ RSpec.describe '/planning_sessions', type: :request do
     it 'destroys the requested planning_session' do
       planning_session = PlanningSession.create! valid_attributes
       expect {
-        delete planning_session_url(planning_session)
+        delete planning_session_url(planning_session.uuid)
       }.to change(PlanningSession, :count).by(-1)
     end
 
     it 'redirects to the planning_sessions list' do
       planning_session = PlanningSession.create! valid_attributes
-      delete planning_session_url(planning_session)
+      delete planning_session_url(planning_session.uuid)
       expect(response).to redirect_to(planning_sessions_url)
     end
   end
