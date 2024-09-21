@@ -1,0 +1,5 @@
+<div id="stories-counts" class="p-4 bg-white rounded-lg shadow-md mb-4">
+  <div class="mb-2"><%= planning_session&.stories.size %> Total Issues</div>
+  <div class="mb-2"><%= planning_session&.stories&.incomplete.size %> Total Unpointed issues</div>
+  <div class="mb-2"><%= planning_session.total_votes %>  Total Points</div>
+</div>

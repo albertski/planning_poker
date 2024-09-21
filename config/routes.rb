@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :planning_sessions, param: :uuid
+  resources :planning_sessions, param: :uuid do
+    resources :stories, module: :planning_sessions
+  end
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

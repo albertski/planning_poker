@@ -1,0 +1,7 @@
+<%= turbo_stream.replace 'stories--new-story' do %>
+  <%= render @story %>
+<% end %>
+
+<%= turbo_stream.replace 'stories-counts' do %>
+  <%= render partial: 'planning_sessions/stories/counts', locals: { planning_session: @planning_session.reload } %>
+<% end %>

@@ -18,6 +18,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_14_165344) do
     t.string "uuid", null: false
     t.string "name"
     t.bigint "owner_id", null: false
+    t.decimal "total_votes", precision: 5, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["owner_id"], name: "index_planning_sessions_on_owner_id"
@@ -26,7 +27,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_14_165344) do
 
   create_table "stories", force: :cascade do |t|
     t.bigint "planning_session_id", null: false
-    t.integer "status"
+    t.string "title"
+    t.integer "status", default: 0
     t.decimal "vote", precision: 5, scale: 2
     t.decimal "vote_average", precision: 5, scale: 2
     t.datetime "created_at", null: false

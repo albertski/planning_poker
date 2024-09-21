@@ -4,6 +4,7 @@ class CreatePlanningSessions < ActiveRecord::Migration[7.1]
       t.string :uuid, null: false
       t.string :name
       t.references :owner, null: false, foreign_key: { to_table: :users }
+      t.decimal :total_votes, precision: 5, scale: 2
 
       t.timestamps
     end

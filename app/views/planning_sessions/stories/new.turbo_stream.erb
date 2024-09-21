@@ -1,0 +1,5 @@
+<%= turbo_stream.prepend "stories-container" do %>
+  <div id="stories--new-story", class="p-4 bg-white rounded-lg shadow-md mb-4 flex justify-between items-start relative">
+    <%= render partial: 'planning_sessions/stories/form', locals: { story: @story, planning_session: @planning_session } %>
+  </div>
+<% end %>

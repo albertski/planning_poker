@@ -1,0 +1,5 @@
+<h1 class="text-3xl font-bold mb-6">Edit Story</h1>
+
+<%= turbo_frame_tag @story do %>
+  <%= render partial: 'planning_sessions/stories/form', locals: { story: @story, planning_session: @planning_session } %>
+<% end %>
