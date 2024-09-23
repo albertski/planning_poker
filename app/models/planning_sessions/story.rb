@@ -10,6 +10,8 @@ module PlanningSessions
     after_update :update_planning_session_total_votes
     after_destroy :update_planning_session_total_votes
 
+    validates :title, presence: true
+
     private
 
     def update_planning_session_total_votes

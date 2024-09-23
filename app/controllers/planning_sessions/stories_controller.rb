@@ -4,7 +4,7 @@ module PlanningSessions
   class StoriesController < ApplicationController
     before_action :authenticate_user!
     before_action :set_planning_session
-    before_action :set_story, only: %i[edit update]
+    before_action :set_story, only: %i[edit update destroy]
 
     def new
       @story = @planning_session.stories.build
@@ -41,8 +41,21 @@ module PlanningSessions
           format.html { redirect_to planning_session_url(@planning_session.uuid) }
         else
           format.html { render :edit, status: :unprocessable_entity }
-          format.turbo_stream { render :edit, status: :unprocessable_entity }
+          format.turbo_stream do
+            render turbo_stream: turbo_stream.replace(@story,
+              partial: 'planning_sessions/stories/form',
+              locals: { story: @story, planning_session: @planning_session })
+          end
         end
+      end
+    end
+
+    def destroy
+      @story.destroy!
+
+      respond_to do |format|
+        format.html { redirect_to planning_session_url(@planning_session.uuid) }
+        format.turbo_stream { render turbo_stream: turbo_stream.remove(@story) }
       end
     end
 
