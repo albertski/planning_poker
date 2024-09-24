@@ -1,4 +1,4 @@
-<%= turbo_frame_tag story, class: 'p-4 bg-white rounded-lg shadow-md mb-4 flex justify-between items-start relative' do %>
+<%= turbo_frame_tag story, class: 'p-4 bg-white rounded-lg shadow-md mb-4 flex relative' do %>
   <div class="flex flex-col">
     <div class="font-bold text-lg">
       <%= story.title %>
@@ -7,15 +7,20 @@
     <div class="text-sm text-gray-600">
       <%= story.status %>
     </div>
+
+    <div class="invisible">
+      <div class="text-gray-500 hover:text-gray-700">&nbps;</div>
+      <div class="text-gray-500 hover:text-gray-700">&nbps;</div>
+    </div>
   </div>
 
-  <div class="flex flex-col items-end space-y-2">
-    <div class="relative group">
-      <%= link_to edit_planning_session_story_path(story.planning_session.uuid, story), class: 'edit-story-button text-gray-500 hover:text-gray-700', data: { turbo_frame: dom_id(story) } do %>
-        &#x22EF;
-      <% end %>
-    </div>
+  <div class="absolute top-2 right-3">
+    <%= link_to edit_planning_session_story_path(story.planning_session.uuid, story), class: 'edit-story-button text-gray-500 hover:text-gray-700', data: { turbo_frame: dom_id(story) } do %>
+      &#x22EF;
+    <% end %>
+  </div>
 
+  <div class="absolute bottom-2 right-2">
     <div class="text-sm text-gray-600">
       <%= format_vote(story.vote) %>
     </div>

@@ -1,6 +1,6 @@
-<%= form_with(model: story, url: story.persisted? ? planning_session_story_path(planning_session.uuid, story) : planning_session_stories_path(planning_session.uuid), method: story.persisted? ? :patch : :post, class: 'space-y-6', scope: :story) do |form| %>
+<%= form_with(model: story, url: story.persisted? ? planning_session_story_path(planning_session.uuid, story) : planning_session_stories_path(planning_session.uuid), method: story.persisted? ? :patch : :post, class: 'flex relative w-full', scope: :story) do |form| %>
   <% if story.errors.any? %>
-    <div class="bg-red-100 text-red-700 p-4 rounded-lg">
+    <div class="bg-red-100 text-red-700 p-4 rounded-lg mb-4">
       <h2 class="font-semibold mb-2"><%= pluralize(story.errors.count, "error") %> prohibited this story from being saved:</h2>
       <ul class="list-disc list-inside">
         <% story.errors.full_messages.each do |message| %>
@@ -10,15 +10,25 @@
     </div>
   <% end %>
 
-  <div class="flex flex-col">
-    <%= form.label :title, class: 'block text-sm font-medium text-gray-700' %>
-    <%= form.text_field :title, class: 'mt-1 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500' %>
+  <div class="flex flex-col w-full">
+    <%= form.label :title, class: 'block font-bold text-lg' %>
+    <%= form.text_field :title, class: 'mt-1 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-full' %>
+
+    <div class="text-sm text-gray-600 mt-2">
+      Status: <%= story.status %>
+    </div>
+
+    <div class="relative group">
+      <%= form.submit 'Save', class: 'bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600' %>
+      <% if story.persisted? %>
+        <%= link_to 'Delete', planning_session_story_path(story.planning_session.uuid, story), method: :delete, data: { turbo_method: :delete, turbo_confirm: 'Are you sure you want to delete?' }, class: 'bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 ml-2' %>
+      <% end %>
+    </div>
   </div>
 
-  <div class="flex justify-end">
-    <%= form.submit 'Save', class: 'bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600' %>
-    <% if story.persisted? %>
-      <%= link_to 'Delete', planning_session_story_path(story.planning_session.uuid, story), method: :delete, data: { turbo_method: :delete, turbo_confirm: 'Are you sure you want to delete' }, class: 'bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600' %>
-    <% end %>
+  <div class="absolute bottom-2 right-2">
+    <div class="text-sm text-gray-600">
+      <%= format_vote(story.vote) %>
+    </div>
   </div>
 <% end %>
