@@ -2,7 +2,8 @@
 
 class PlanningSessionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_planning_session, only: %i[ show edit update destroy ]
+  before_action :set_planning_session, only: %i[show edit update destroy]
+  before_action :set_plannins_session_voter, only: :show
 
   def index
     @planning_sessions = PlanningSession.owned_by(current_user).order(created_at: :desc)
@@ -54,11 +55,17 @@ class PlanningSessionsController < ApplicationController
 
   private
 
-    def set_planning_session
-      @planning_session = PlanningSession.find_by(uuid: params[:uuid])
-    end
+  def set_planning_session
+    @planning_session = PlanningSession.find_by(uuid: params[:uuid])
+  end
 
-    def planning_session_params
-      params.require(:planning_session).permit(:name)
-    end
+  def planning_session_params
+    params.require(:planning_session).permit(:name)
+  end
+
+  def set_plannins_session_voter
+    return if @planning_session.owner == current_user
+
+    PlanningSessions::VoterUser.find_or_create_by(user: current_user, planning_session: @planning_session)
+  end
 end

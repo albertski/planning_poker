@@ -16,5 +16,10 @@
 
   <div class="w-2/3 p-4">
     <h1 class="text-2xl font-bold"><%= @planning_session.name %></h1>
+
+    <div id="planning_sessions_voter_users" class="flex flex-wrap gap-4 mt-2">
+      <%= turbo_stream_from "voter-users" %>
+      <%= render @planning_session.voter_users %>
+    </div>
   </div>
 </div>

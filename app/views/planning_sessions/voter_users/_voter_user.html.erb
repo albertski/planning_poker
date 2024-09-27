@@ -1,0 +1,8 @@
+<div class="flex flex-col items-center space-y-2">
+  <div class="h-16 w-16 rounded-full flex items-center justify-center text-white font-bold" style="background-color: <%= random_color %>;">
+    <%= voter_user.user.first_name[0].upcase %><%= voter_user.user.last_name[0].upcase %>
+  </div>
+  <div class="text-center">
+    <%= voter_user.user.first_name %> <%= voter_user.user.last_name %>
+  </div>
+</div>

@@ -3,6 +3,9 @@
 class PlanningSession < ApplicationRecord
   belongs_to :owner, class_name: 'User'
   has_many :stories, class_name: 'PlanningSessions::Story', dependent: :destroy
+  has_many :voter_users, class_name: 'PlanningSessions::VoterUser', dependent: :destroy
+  has_many :users, through: :voter_users
+  has_many :votes, through: :voter_users
 
   scope :owned_by, ->(user) { where(owner: user) }
 
